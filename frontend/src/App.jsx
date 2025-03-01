@@ -4,7 +4,7 @@ import Home from './components/Home'
 import Features from './components/Features'
 import Contact from './components/Contact'
 import Form from './components/Form'
-import Login from './auth/login'
+import Login from './auth/Login'
 import Signup from './auth/Signup'
 
 const appRouter = createBrowserRouter([
