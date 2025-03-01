@@ -3,6 +3,9 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Home from './components/Home'
 import Features from './components/Features'
 import Contact from './components/Contact'
+import Form from './components/Form'
+import Login from './auth/login'
+import Signup from './auth/Signup'
 
 const appRouter = createBrowserRouter([
   {
@@ -16,6 +19,18 @@ const appRouter = createBrowserRouter([
   {
     path: '/contact',
     element: <Contact />
+  },
+  {
+    path: '/dataForm',
+    element: <Form />
+  },
+  {
+    path: '/login',
+    element: <Login />
+  },
+  {
+    path: '/signup',
+    element: <Signup />
   },
 ])
 

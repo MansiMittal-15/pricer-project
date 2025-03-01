@@ -3,7 +3,7 @@ import React from "react";
 const Dropdown = React.forwardRef(({ items, position }, ref) => {
   return (
     <div
-      className="w-56 h-auto m-3 border solid absolute bg-white z-10 "
+      className="w-56 h-auto m-3 border solid absolute bg-white z-30 "
       style={{ left:position.left, top: position.top}}
       ref={ref}
     >

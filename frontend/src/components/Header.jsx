@@ -51,7 +51,7 @@ const Header = () => {
         />
       )}
 
-      <div className="text-xl text-white bg-slate-950 py-3 px-5 sticky top-0 z-20">
+      <div className="text-xl text-white bg-slate-950 py-5 px-5 sticky top-0 z-20">
         <div className="max-w-7xl mx-auto flex justify-between ">
           <div className="flex items-center gap-16 ">
             <p className="text-3xl text-white font-bold "><Link to={'/'}>Pricer</Link></p>
@@ -68,7 +68,7 @@ const Header = () => {
               </div>
               <div className="">
                 <div
-                  className=" hover:text-slate-500 cursor-pointer font-semibold"
+                  className=" hover:text-slate-500 cursor-pointer font-semibold z-100"
                   onClick={(e) =>
                     handleToggleDropDown(e, "jobs", [
                       "Free Trial",
@@ -97,10 +97,20 @@ const Header = () => {
               </div>
             </div>
           </div>
-          <div>
-            <button className="border rounded-xl bg-slate-900 font-semibold p-2 hover:bg-black text-lg">
+          <div className="flex gap-4">
+            {/* <button className="border rounded-xl bg-slate-900 font-semibold p-2 hover:bg-black text-lg">
               Login/Sign Up
-            </button>
+            </button> */}
+            <Link to={"/login"}>
+              <button className="border-[2px] border-white p-2 text-xl rounded-xl bg-slate-950 text-white hover:bg-slate-800  ">
+                Login
+              </button>
+            </Link>
+            <Link to={"/signup"}>
+              <button className="border-[2px] border-black p-2 text-xl rounded-xl bg-slate-200 text-black hover:bg-slate-300  ">
+                Signup
+              </button>
+            </Link>
           </div>
         </div>
       </div>
