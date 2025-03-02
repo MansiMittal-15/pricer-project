@@ -5,7 +5,7 @@ const Contact = () => {
   return (
     <div>
       <Header />
-      <div className="bg-gradient-to-b from-pink-200 to-orange-200 min-h-screen ">
+      <div className="bg-gradient-to-b from-pink-200/20 to-orange-200/20 min-h-screen ">
         <div className="max-w-7xl mx-auto px-10 ">
           <div className="flex justify-between gap-16 items-center h-[90vh] ">
             <div className="w-[50%] flex flex-col gap-8 ">

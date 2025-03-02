@@ -6,7 +6,7 @@ const Features = () => {
   return (
     <div>
       <Header />
-      <div className="bg-slate-400 min-h-screen">
+      <div className="bg-slate-50 min-h-screen">
         <div className="max-w-7xl mx-auto px-10">
           <h1 className="text-5xl font-medium py-2 border-b-black border-b-2 ">
             Explore Our Core Features

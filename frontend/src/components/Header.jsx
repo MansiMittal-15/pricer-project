@@ -51,10 +51,11 @@ const Header = () => {
         />
       )}
 
-      <div className="text-xl text-white bg-slate-950 py-5 px-5 sticky top-0 z-20">
+      {/* <div className="text-xl text-white bg-slate-950 py-5 px-5 sticky top-0 z-20"> */}
+      <div className="text-xl text-black bg-white py-5 px-5 sticky top-0 z-20 border-b-2">
         <div className="max-w-7xl mx-auto flex justify-between ">
           <div className="flex items-center gap-16 ">
-            <p className="text-3xl text-white font-bold "><Link to={'/'}>Pricer</Link></p>
+            <p className="text-3xl text-black font-bold "><Link to={'/'}>Pricer</Link></p>
             <div className="flex gap-6 ">
               <div>
                 <div className=" hover:text-slate-500 cursor-pointer font-semibold">
@@ -102,13 +103,13 @@ const Header = () => {
               Login/Sign Up
             </button> */}
             <Link to={"/login"}>
-              <button className="border-[2px] border-white p-2 text-xl rounded-xl bg-slate-950 text-white hover:bg-slate-800  ">
+              <button className="border-[2px] w-28 border-black p-2 text-xl rounded-xl bg-slate-950 text-white hover:bg-slate-800  ">
                 Login
               </button>
             </Link>
             <Link to={"/signup"}>
-              <button className="border-[2px] border-black p-2 text-xl rounded-xl bg-slate-200 text-black hover:bg-slate-300  ">
-                Signup
+              <button className="border-[2px] w-28 border-black p-2 text-xl rounded-xl bg-slate-200 text-black hover:bg-slate-300  ">
+                SignUp
               </button>
             </Link>
           </div>

@@ -2,7 +2,8 @@ import React from 'react'
 
 const FeatureCard = ({color1, color2, title, description}) => {
   const gradientStyle = {
-    backgroundImage: `linear-gradient(to top right, ${color1}, ${color2})`
+    // backgroundImage: `linear-gradient(to top right, ${color1}, ${color2})`
+    backgroundImage: `linear-gradient(to top left, white, #E2E8F0)`
   };
   return (
     <div style={gradientStyle} 
