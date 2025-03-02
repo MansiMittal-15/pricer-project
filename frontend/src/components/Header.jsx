@@ -104,7 +104,7 @@ const Header = () => {
             </button> */}
             <Link to={"/login"}>
               <button className="border-[2px] w-28 border-black p-2 text-xl rounded-xl bg-slate-950 text-white hover:bg-slate-800  ">
-                Login
+                Sign In
               </button>
             </Link>
             <Link to={"/signup"}>

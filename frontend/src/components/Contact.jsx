@@ -5,42 +5,118 @@ const Contact = () => {
   return (
     <div>
       <Header />
-      <div className="bg-gradient-to-b from-pink-200/20 to-orange-200/20 min-h-screen ">
-        <div className="max-w-7xl mx-auto px-10 ">
-          <div className="flex justify-between gap-16 items-center h-[90vh] ">
-            <div className="w-[50%] flex flex-col gap-8 ">
-              <h1 className="text-5xl font-medium">Contact us</h1>
-              <p className="text-xl font-light">
-                Need to get in touch with us? Either fill out the form with your
-                inquiry or find the department email you'd like to contact
-                below.
-              </p>
-            </div>
-            <form className="w-[50%] mx-auto flex flex-col justify-center items-center border-2 bg-white/40 border-slate-900 rounded-2xl">
-              <div className="h-[400px] flex flex-col gap-4 p-6" >
-                <div className="flex gap-4"  >
-                  <div className="flex flex-col gap-1">
-                    <label className="text-xl font-serif" htmlFor="firstName">First Name</label>
-                    <input type="text" id="firstName" className="rounded-xl outline-none p-2" />
+      <div className="max-w-[1200px] mx-auto">
+        <div className="mx-[24px] flex flex-col gap-10 items-center py-10">
+          <div className="flex flex-col gap-2 items-center">
+            <h1 className="text-5xl font-semibold">Contact Us</h1>
+            <p>Any question or remarks? Just write us a message!</p>
+          </div>
+          <div className=" w-[100%] flex ">
+            <div className="w-[40%] text-white/80 p-8 bg-black/90 rounded-tl-2xl flex flex-col rounded-bl-2xl gap-20 ">
+              <div className="flex flex-col gap-2">
+                <h1 className="text-4xl">Contact Information</h1>
+                <p>Say something to start a live chat!</p>
+              </div>
+              <div className="flex flex-col gap-6">
+                <div className="flex gap-6">
+                  <img src="" alt="No." />
+                  <div>+1218 3327 238</div>
+                </div>
+                <div className="flex gap-6">
+                  <img src="" alt="Mail" />
+                  <div>demo@gmail.com</div>
+                </div>
+                <div className="flex gap-6">
+                  <img src="" alt="locatn" />
+                  <div>
+                    Lorem ipsum dolor, sit amet consect ing elit. Mollitia earum
+                    consequatur delectus?
                   </div>
-                  <div className="flex flex-col gap-1">
-                    <label className="text-xl font-serif" htmlFor="lastName">Last Name</label>
-                    <input type="text" id="lastName" className="rounded-xl outline-none p-2" />
-                  </div>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <label className="text-xl font-serif " htmlFor="email">Email</label>
-                  <input type="email" id="email" className="rounded-xl outline-none p-2" />
-                </div>
-                <div className="flex flex-col gap-1">
-                  <label className="text-xl font-serif" htmlFor="message">What can we help you with?</label>
-                  <textarea id="message" className="h-20 outline-none rounded-xl"/>
-                </div>
-                <div>
-                  <button className="bg-slate-800 w-full p-2 text-white rounded-xl text-xl hover:bg-black">Submit</button>
                 </div>
               </div>
-            </form>
+              <div>
+                <ul className="flex gap-6">
+                  <li>
+                    <img src="" alt="tw" />
+                  </li>
+                  <li>
+                    <img src="" alt="ig" />
+                  </li>
+                  <li>
+                    <img src="" alt="in" />
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="w-[60%] p-8 bg-slate-200 flex flex-col gap-6 rounded-tr-2xl rounded-br-2xl">
+              <div className="flex justify-between ">
+                <div className="flex flex-col w-[45%] gap-2 font-semibold ">
+                  <label htmlFor="firstName">First Name</label>
+                  <input
+                    type="text"
+                    className="outline-none rounded-lg p-2 bg-white "
+                    placeholder="Enter your First Name.."
+                    id="firstName"
+                  />
+                </div>
+                <div className="flex flex-col w-[45%] gap-2 font-semibold ">
+                  <label htmlFor="lastName">Last Name</label>
+                  <input
+                    type="text"
+                    className="outline-none rounded-lg p-2 bg-white "
+                    placeholder="Enter your Last Name.."
+                    id="lastName"
+                  />
+                </div>
+              </div>
+              <div className="flex justify-between">
+                <div className="flex flex-col w-[45%] gap-2 font-semibold ">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    type="email"
+                    className="outline-none rounded-lg p-2 bg-white "
+                    placeholder="Enter your email.."
+                    id="email"
+                  />
+                </div>
+                <div className="flex flex-col w-[45%] gap-2 font-semibold ">
+                  <label htmlFor="phoneNumber">Phone Number</label>
+                  <input
+                    type="text"
+                    className="outline-none rounded-lg p-2 bg-white "
+                    placeholder="Enter your Phone Number.."
+                    id="phoneNumber"
+                  />
+                </div>
+              </div>
+              <div>
+                <div className="flex flex-col w-[100%] gap-2 font-semibold ">
+                  <label htmlFor="Subject">Subject</label>
+                  <input
+                    type="text"
+                    className="outline-none rounded-lg p-2 bg-white "
+                    placeholder="Write your Subject.."
+                    id="Subject"
+                  />
+                </div>
+              </div>
+              <div>
+                <div className="flex flex-col w-[100%] gap-2 font-semibold ">
+                  <label htmlFor="Message">Message</label>
+                  <input
+                    type="text"
+                    className="outline-none rounded-lg p-2 bg-white "
+                    placeholder="Write your Message.."
+                    id="Message"
+                  />
+                </div>
+              </div>
+              <div className="flex w-[100%] justify-center ">
+                <button className="bg-black/90 text-white w-[100%] p-2 rounded-lg text-lg hover:bg-black">
+                  Send Message
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
