@@ -5,8 +5,8 @@ function App() {
   return (
     <>
     <Header />
-    <div className="min-h-screen bg-gradient-to-br from-blue-300 to-purple-400 flex items-center justify-center ">
-      <div className="bg-white shadow-md rounded-md w-full max-w-md p-6">
+    <div className="min-h-screen flex items-center justify-center ">
+      <div className="bg-black/10 backdrop-blur-md shadow-md rounded-md w-full max-w-md p-6">
         <h1 className="text-2xl font-semibold text-gray-800 mb-4">Required Data for Analysis</h1>
         <form className="space-y-4">
           {/* Category */}

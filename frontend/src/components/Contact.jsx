@@ -1,9 +1,11 @@
 import React from "react";
 import Header from "./Header";
+import { FaInstagram, FaLinkedin, FaLocationArrow, FaMailBulk, FaPhone, FaTwitter } from "react-icons/fa";
+import Footer from "./Footer";
 
 const Contact = () => {
   return (
-    <div>
+    <>
       <Header />
       <div className="max-w-[1200px] mx-auto">
         <div className="mx-[24px] flex flex-col gap-10 items-center py-10">
@@ -19,15 +21,15 @@ const Contact = () => {
               </div>
               <div className="flex flex-col gap-6">
                 <div className="flex gap-6">
-                  <img src="" alt="No." />
+                  <FaPhone className="text-white text-2xl hover:text-purple-800 cursor-pointer" />
                   <div>+1218 3327 238</div>
                 </div>
                 <div className="flex gap-6">
-                  <img src="" alt="Mail" />
+                  <FaMailBulk className="text-white text-2xl hover:text-purple-800 cursor-pointer" />
                   <div>demo@gmail.com</div>
                 </div>
-                <div className="flex gap-6">
-                  <img src="" alt="locatn" />
+                <div className="flex gap-6 items-center">
+                  <FaLocationArrow className="text-white text-3xl hover:text-purple-800 cursor-pointer" />
                   <div>
                     Lorem ipsum dolor, sit amet consect ing elit. Mollitia earum
                     consequatur delectus?
@@ -37,18 +39,18 @@ const Contact = () => {
               <div>
                 <ul className="flex gap-6">
                   <li>
-                    <img src="" alt="tw" />
+                    <FaTwitter className="text-white text-2xl hover:text-purple-800 cursor-pointer" />
                   </li>
                   <li>
-                    <img src="" alt="ig" />
+                    <FaInstagram className="text-white text-2xl hover:text-purple-800 cursor-pointer" />
                   </li>
                   <li>
-                    <img src="" alt="in" />
+                    <FaLinkedin className="text-white text-2xl hover:text-purple-800 cursor-pointer" />
                   </li>
                 </ul>
               </div>
             </div>
-            <div className="w-[60%] p-8 bg-slate-200 flex flex-col gap-6 rounded-tr-2xl rounded-br-2xl">
+            <div className="w-[60%] p-8 bg-purple-200 flex flex-col gap-6 rounded-tr-2xl rounded-br-2xl">
               <div className="flex justify-between ">
                 <div className="flex flex-col w-[45%] gap-2 font-semibold ">
                   <label htmlFor="firstName">First Name</label>
@@ -112,7 +114,7 @@ const Contact = () => {
                 </div>
               </div>
               <div className="flex w-[100%] justify-center ">
-                <button className="bg-black/90 text-white w-[100%] p-2 rounded-lg text-lg hover:bg-black">
+                <button className="bg-purple-700/90 text-white w-[100%] p-2 rounded-lg text-lg hover:bg-purple-800">
                   Send Message
                 </button>
               </div>
@@ -120,7 +122,8 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

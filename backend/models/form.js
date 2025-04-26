@@ -11,7 +11,7 @@ const formSchema = mongoose.Schema({
     },
     productUser: {
         type: String,
-        enum: ['men', 'women', 'kids'],
+        enum: ['men', 'women', 'kids', 'unisex'],
         required: true,
     },
     image: {

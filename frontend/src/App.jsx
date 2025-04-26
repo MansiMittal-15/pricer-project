@@ -6,6 +6,7 @@ import Contact from './components/Contact'
 import Form from './components/Form'
 import Login from './auth/Login'
 import Signup from './auth/Signup'
+import MobileNavigation from './components/MobileNavigation'
 
 const appRouter = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const appRouter = createBrowserRouter([
     path: '/signup',
     element: <Signup />
   },
+  {
+    path: '/mobileNavigation',
+    element: <MobileNavigation />
+  }
 ])
 
 const App = () => {

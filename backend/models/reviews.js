@@ -12,6 +12,7 @@ const reviewsSchema = mongoose.Schema({
     ratings: {
         type: Number,
         required: true,
+        default: 5,
     },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,

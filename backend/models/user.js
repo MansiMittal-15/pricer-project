@@ -20,13 +20,11 @@ const userSchema = mongoose.Schema({
     },
     reviews: [ {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Reviews',
-        required: true,
+        ref: 'Reviews', 
     }],
     forms: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Form',
-        required: true,
     }],
 }, {timestamps: true});
 

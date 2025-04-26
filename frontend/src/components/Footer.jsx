@@ -1,4 +1,5 @@
 import React from "react";
+import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -15,7 +16,7 @@ const Footer = () => {
               </p>
             </div>
             <div>
-              <button className="text-xl text-black font-bold bg-yellow-500 p-6 rounded-full">Get Started</button>
+              <button className="text-xl text-white font-bold bg-purple-500 hover:bg-purple-600 p-6 rounded-full">Get Started</button>
             </div>
           </div>
           <div className="flex flex-col">
@@ -49,23 +50,23 @@ const Footer = () => {
                   <h3 className="text-xl">Social Media</h3>
                   <ul className="flex gap-4">
                     <li>
-                      <img src="" alt="fb" />
+                      <FaFacebook className="text-2xl hover:bg-purple-800 hover:text-white rounded-full" />
                     </li>
                     <li>
-                      <img src="" alt="ig" />
+                      <FaInstagram className="text-2xl hover:bg-purple-800 hover:text-white rounded-full" />
                     </li>
                     <li>
-                      <img src="" alt="in" />
+                      <FaLinkedin className="text-2xl hover:bg-purple-800 hover:text-white rounded-full" />
                     </li>
                     <li>
-                      <img src="" alt="x" />
+                      <FaTwitter className="text-2xl hover:bg-purple-800 hover:text-white rounded-full" />
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
             <div className="py-6 text-sm flex justify-between">
-              <div >&copy; Pricer 2025</div>
+              <div >&copy; Pricer {new Date().getFullYear()} All Rights Reserved</div>
               <div>
                 <ul className="flex gap-10">
                   <li>Privacy Policy</li>

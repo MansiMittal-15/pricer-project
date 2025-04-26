@@ -1,4 +1,4 @@
-import { User } from "../model/user.js";
+import { User } from "../models/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -20,7 +20,7 @@ export const register = async (req, res) => {
       });
     }
 
-    const hashedPassword = bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
     await User.create({
       fullname,
       email,
@@ -28,12 +28,16 @@ export const register = async (req, res) => {
       password: hashedPassword,
     });
 
-    return res.status(200).json({
+    return res.status(201).json({
       success: true,
       message: "Account created successfully!",
     });
   } catch (error) {
     console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error!",
+    });
   }
 };
 
@@ -46,7 +50,7 @@ export const login = async (req, res) => {
         message: "Some data field is missing!",
       });
     }
-    const user = User.findOne({ email });
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({
         success: false,
@@ -72,7 +76,7 @@ export const login = async (req, res) => {
       .status(200)
       .cookie("token", token, {
         maxAge: 24 * 60 * 60 * 1000,
-        httpsOnly: true,
+        httpOnly: true,
         sameSite: "strict",
       })
       .json({
@@ -82,6 +86,10 @@ export const login = async (req, res) => {
       });
   } catch (error) {
     console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error!",
+    });
   }
 };
 
@@ -93,5 +101,9 @@ export const logout = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error!",
+    });
   }
 };
