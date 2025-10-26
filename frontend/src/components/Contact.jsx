@@ -16,7 +16,7 @@ const Contact = () => {
           <div className=" w-[100%] flex ">
             <div className="w-[40%] text-white/80 p-8 bg-black/90 rounded-tl-2xl flex flex-col rounded-bl-2xl gap-20 ">
               <div className="flex flex-col gap-2">
-                <h1 className="text-4xl">Contact Information</h1>
+                <h2 className="text-4xl">Contact Information</h2>
                 <p>Say something to start a live chat!</p>
               </div>
               <div className="flex flex-col gap-6">
@@ -39,13 +39,19 @@ const Contact = () => {
               <div>
                 <ul className="flex gap-6">
                   <li>
-                    <FaTwitter className="text-white text-2xl hover:text-purple-800 cursor-pointer" />
+                    <a href="[Your Twitter URL]" aria-label="Visit us on Twitter">
+                       <FaTwitter className="text-white text-2xl hover:text-purple-800 cursor-pointer" />
+                    </a>
                   </li>
                   <li>
-                    <FaInstagram className="text-white text-2xl hover:text-purple-800 cursor-pointer" />
+                    <a href="[Your Instagram URL]" aria-label="Visit us on Instagram">
+                       <FaInstagram className="text-white text-2xl hover:text-purple-800 cursor-pointer" />
+                    </a>
                   </li>
                   <li>
-                    <FaLinkedin className="text-white text-2xl hover:text-purple-800 cursor-pointer" />
+                    <a href="[Your Linkedin URL]" aria-label="Visit us on Linkedin">
+                       <FaLinkedIn className="text-white text-2xl hover:text-purple-800 cursor-pointer" />
+                    </a>
                   </li>
                 </ul>
               </div>
