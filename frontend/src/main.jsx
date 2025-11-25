@@ -7,16 +7,19 @@ import store from "./redux/store.js";
 import { Toaster } from "react-hot-toast";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
+import { HelmetProvider } from "react-helmet-async";
 
 const persistor = persistStore(store);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
+   <HelmetProvider>
     <Provider store={store}>
       <Toaster />
       <PersistGate loading={null} persistor={persistor}>
         <App />
       </PersistGate>
     </Provider>
+   </HelmetProvider>
   </StrictMode>
 );

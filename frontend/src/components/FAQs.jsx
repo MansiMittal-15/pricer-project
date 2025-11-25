@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet"; // 1. Import Helmet
 
 const FAQs = () => {
   const faq_questions = [
@@ -44,16 +45,51 @@ const FAQs = () => {
     },
   ];
   return (
-    <div className="max-w-[1200px] mx-auto py-24 ">
+    <>
+    <Helmet>
+        <title>Pricer FAQ | AI-Powered Dynamic Pricing Questions & Answers</title>
+        <meta
+          name="description"
+          content="Find answers to frequently asked questions about Pricer, the AI-powered price recommendation system for startups and small businesses. Learn how to maximize revenue with data-driven pricing."
+        />
+        {/* 3. Indexing directive - Tells search engines to crawl and index the page */}
+        <meta name="robots" content="index, follow" />
+        {/* Optional: Add canonical URL if content is duplicated elsewhere */}
+        {/* <link rel="canonical" href="https://yourwebsite.com/faqs" /> */}
+
+        {/* 4. Structured Data (Schema Markup) for FAQPage. This is essential for rich results! */}
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                ${faq_questions.map(
+                  (faq) =>
+                    `{
+                      "@type": "Question",
+                      "name": "${faq.question.replace(/"/g, '\\"')}",
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "${faq.answer.replace(/"/g, '\\"')}"
+                      }
+                    }`
+                ).join(',\n')}
+              ]
+            }
+          `}
+        </script>
+    </Helmet>
+    <section className="max-w-[1200px] mx-auto py-24 ">
       <div className="flex flex-col gap-16 mx-10">
-        <div className="flex justify-center flex-col items-center w-[60%] max-md:w-[100%] mx-auto gap-4 max-lg:w-[80%] max-xl:w-[60%]">
-          <h1 className="text-5xl max-md:text-3xl max-sm:text-2xl max-lg:text-3xl max-xl:text-4xl">Frequently Asked Questions</h1>
+        <header className="flex justify-center flex-col items-center w-[60%] max-md:w-[100%] mx-auto gap-4 max-lg:w-[80%] max-xl:w-[60%]">
+          <h2 className="text-5xl max-md:text-3xl max-sm:text-2xl max-lg:text-3xl max-xl:text-4xl">Frequently Asked Questions</h2>
           <p className="text-center max-md:text-sm max-sm:text-xs max-lg:text-base max-xl:text-lg">
             Get clear, data-driven answers to your pricing questions. Explore
             our FAQ section for insights on optimizing your product pricing and
             maximizing revenue.
           </p>
-        </div>
+        </header>
         <div className="flex flex-col gap-4">
           {faq_questions.map((faq, index) => (
             <details
@@ -66,7 +102,8 @@ const FAQs = () => {
           ))}
         </div>
       </div>
-    </div>
+    </section>
+    </>
   );
 };
 
