@@ -7,11 +7,11 @@ function App() {
     <Header />
     <div className="min-h-screen flex items-center justify-center ">
       <div className="bg-black/10 backdrop-blur-md shadow-md rounded-md w-full max-w-md p-6">
-        <h1 className="text-2xl font-semibold text-gray-800 mb-4">Required Data for Analysis</h1>
+        <h1 className="text-2xl font-semibold text-white mb-4">Required Data for Analysis</h1>
         <form className="space-y-4">
           {/* Category */}
           <div>
-            <label htmlFor="category" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="category" className="block text-sm font-medium text-white">
               Category
             </label>
             <input
@@ -23,7 +23,7 @@ function App() {
           </div>
           {/* subcategory */}
           <div>
-            <label htmlFor="subcategory" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="subcategory" className="block text-sm font-medium text-white">
               SubCategory
             </label>
             <input
@@ -35,7 +35,7 @@ function App() {
           </div>
           {/* Fabric */}
           <div>
-            <label htmlFor="fabric" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="fabric" className="block text-sm font-medium text-white">
               Fabric
             </label>
             <input
@@ -47,7 +47,7 @@ function App() {
           </div>
           {/* color */}
           <div>
-            <label htmlFor="color" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="color" className="block text-sm font-medium text-white">
               Color
             </label>
             <input
@@ -59,7 +59,7 @@ function App() {
           </div>
           {/* product user */}
           <div>
-            <label htmlFor="productUser" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="productUser" className="block text-sm font-medium text-white">
               Product User
             </label>
             <select id="productUser"
@@ -79,7 +79,7 @@ function App() {
           </div>
           {/* Image */}
           <div>
-            <label htmlFor="image" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="image" className="block text-sm font-medium text-white">
               Image
             </label>
             <input

@@ -3,51 +3,63 @@ import Header from "./Header";
 import FeatureCard from "./FeatureCard";
 
 const Features = () => {
+  const features = [
+    {
+      title: "Real-Time Data Collection",
+      description: "Seamlessly fetch the latest market prices from trusted sources to ensure accurate recommendations.",
+      icon: "📊"
+    },
+    {
+      title: "Competitor Price Comparison", 
+      description: "Compare your prices with competitors to identify market opportunities and stay ahead.",
+      icon: "⚖️"
+    },
+    {
+      title: "Historical Price Trends",
+      description: "Analyze historical trends to predict price fluctuations and make informed decisions.",
+      icon: "📈"
+    },
+    {
+      title: "AI-Powered Analytics",
+      description: "Advanced machine learning algorithms provide intelligent pricing insights and recommendations.",
+      icon: "🤖"
+    },
+    {
+      title: "Real-Time Alerts",
+      description: "Get instant notifications when market conditions change or opportunities arise.",
+      icon: "🔔"
+    },
+    {
+      title: "Custom Dashboards",
+      description: "Personalized dashboards with real-time metrics and customizable reporting tools.",
+      icon: "📋"
+    }
+  ];
+
   return (
-    <div>
+    <div className="min-h-screen">
       <Header />
-      <div className="bg-slate-50 min-h-screen">
-        <div className="max-w-7xl mx-auto px-10">
-          <h1 className="mx-[24px] text-5xl font-medium py-2 border-b-black border-b-2 ">
-            Explore Our Core Features
-          </h1>
-          <p className="text-xl font-extralight my-1 ">
-            Optimized tools to help you make smarter pricing decisions powered
-            by real-time data, analytics, and trends.
-          </p>
-          <div className="grid grid-cols-3 max-sm:grid-cols-1 max-md:grid-cols-2 max-lg:grid-cols-2 gap-5 my-4">
-            <FeatureCard
-              color1="#bbf7d0"
-              color2="pink"
-              title={"Real-Time Data Collection"}
-              description={
-                "Seamlessly fetch the latest market prices from trusted sources to ensure accurate recommendations."
-              }
-            />
-            <FeatureCard
-              color1="#fef08a"
-              color2="#93c5fd"
-              title={"Competitor Price Comparison"}
-              description={
-                "Compare your prices with competitors to identify market opportunities and stay ahead."
-              }
-            />
-            <FeatureCard
-              color1="#fca5a5 "
-              color2="#d8b4fe "
-              title={"Historical Price Trends"}
-              description={
-                "Analyze historical trends to predict price fluctuations and make informed decisions."
-              }
-            />
-            <FeatureCard
-              color1="#fdba74 "
-              color2="#5eead4 "
-              title={"Real-Time Price Comparison"}
-              description={
-                "Instantly compare prices from multiple vendors for construction materials and services. Get up-to-date price insights."
-              }
-            />
+      <div className="py-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center space-y-6 mb-16">
+            <h1 className="text-5xl md:text-6xl font-bold gradient-text animate-fade-in">
+              Powerful Features
+            </h1>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Advanced tools and intelligent analytics to revolutionize your pricing strategy
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {features.map((feature, index) => (
+              <div key={index} className="animate-fade-in" style={{animationDelay: `${index * 0.1}s`}}>
+                <FeatureCard
+                  title={feature.title}
+                  description={feature.description}
+                  icon={feature.icon}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>

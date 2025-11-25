@@ -1,23 +1,37 @@
 import React from "react";
 
-const FeatureCard = ({ color1, color2, title, description }) => {
-  const gradientStyle = {
-    // backgroundImage: `linear-gradient(to top right, ${color1}, ${color2})`
-    backgroundImage: `linear-gradient(to top left, rgb(126 34 206 / 0.3), #E2E8F0, #fffeee, #E2E8F0, rgb(126 34 206 / 0.3), #fffeee, #E2E8F0, rgb(126 34 206 / 0.3), #fffeee, #E2E8F0)`,
-  };
+const FeatureCard = ({ color1, color2, title, description, icon }) => {
   return (
-    <div
-      style={gradientStyle}
-      className={`relative border-2 flex flex-col justify-between rounded-xl p-2 my-2 border-blue-950 `}
-    >
-      <h1 className="text-2xl text-purple-700 font-medium">{title}</h1>
-      <p className="text-lg font-light my-2">{description}</p>
-      <button
-        aria-label={`learn more about ${title}`}
-        className="bg-white p-2 rounded-xl hover:bg-slate-200 border-2 text-center border-black"
-      >
-        Learn More
-      </button>
+    <div className="card-neon group hover:scale-105 transition-all duration-300 p-8 animate-fade-in">
+      <div className="space-y-6">
+        {/* Icon */}
+        <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-neon-blue to-neon-purple rounded-2xl group-hover:animate-bounce-soft">
+          {icon && <div className="text-white text-2xl">{icon}</div>}
+        </div>
+        
+        {/* Title */}
+        <h3 className="text-2xl font-bold gradient-text group-hover:animate-pulse-neon">
+          {title}
+        </h3>
+        
+        {/* Description */}
+        <p className="text-gray-300 leading-relaxed text-lg">
+          {description}
+        </p>
+        
+        {/* Learn More Button */}
+        <button
+          aria-label={`learn more about ${title}`}
+          className="btn-glass w-full text-center py-3 group-hover:btn-neon transition-all duration-300"
+        >
+          <span>Learn More</span>
+        </button>
+      </div>
+      
+      {/* Animated Border Effect */}
+      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink p-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10">
+        <div className="w-full h-full bg-dark-900 rounded-2xl"></div>
+      </div>
     </div>
   );
 };

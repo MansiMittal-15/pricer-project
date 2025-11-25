@@ -1,69 +1,186 @@
-import React from "react";
+import React, { useState } from "react";
+import { FaChevronDown, FaChevronUp, FaQuestionCircle } from "react-icons/fa";
 
 const FAQs = () => {
+  const [openIndex, setOpenIndex] = useState(null);
+
   const faq_questions = [
     {
       question: "What is Pricer and how does it work?",
       answer:
-        "Pricer is an AI-powered price recommendation system that helps startups optimize their product pricing to maximize revenue. It analyzes market trends, competitor pricing, and consumer behavior to suggest the best price points for your products.",
+        "Pricer is an AI-powered price recommendation system that helps businesses optimize their product pricing to maximize revenue. It analyzes market trends, competitor pricing, and consumer behavior to suggest the best price points for your products using advanced machine learning algorithms.",
+      category: "General"
     },
     {
-      question: "How can Pricer help my startup increase revenue?",
+      question: "How can Pricer help my business increase revenue?",
       answer:
-        "By using data-driven insights, Pricer recommends optimal pricing strategies that balance competitiveness and profitability, ensuring you don’t underprice or overprice your products.",
+        "By using data-driven insights, Pricer recommends optimal pricing strategies that balance competitiveness and profitability. Our platform has helped businesses increase revenue by an average of 15% through intelligent pricing optimization and real-time market analysis.",
+      category: "Benefits"
     },
     {
-      question: "Does Pricer work for all types of products?",
+      question: "Does Pricer work for all types of products and industries?",
       answer:
-        "Yes! Pricer can analyze and recommend pricing for a wide range of products, from electronics and fashion to SaaS services and digital goods.",
+        "Yes! Pricer can analyze and recommend pricing for a wide range of products and industries, from electronics and fashion to SaaS services, digital goods, B2B services, and even physical products. Our AI adapts to different market dynamics and pricing models.",
+      category: "Compatibility"
     },
     {
       question: "How does Pricer determine the best price for my product?",
       answer:
-        "Pricer uses advanced machine learning algorithms that consider factors such as market demand, competitor pricing, historical sales data, and customer behavior to generate pricing recommendations.",
+        "Pricer uses advanced machine learning algorithms that consider multiple factors including market demand, competitor pricing, historical sales data, customer behavior patterns, seasonality, and economic indicators to generate accurate pricing recommendations.",
+      category: "Technology"
     },
     {
-      question: "Can I integrate Pricer with my e-commerce platform?",
+      question: "Can I integrate Pricer with my existing e-commerce platform?",
       answer:
-        "Yes! Pricer supports integration with popular e-commerce platforms and APIs, making it easy to automate pricing updates and implement recommendations.",
+        "Absolutely! Pricer supports seamless integration with popular e-commerce platforms including Shopify, WooCommerce, Magento, and custom APIs. Our RESTful API makes it easy to automate pricing updates and implement recommendations in real-time.",
+      category: "Integration"
     },
     {
       question: "How often does Pricer update pricing recommendations?",
       answer:
-        "The frequency of updates depends on the market dynamics and your business preferences. You can configure Pricer to provide daily, weekly, or real-time pricing suggestions.",
+        "The frequency of updates depends on your business needs and market dynamics. You can configure Pricer to provide daily, weekly, or real-time pricing suggestions. Most businesses benefit from daily updates to stay competitive in fast-moving markets.",
+      category: "Updates"
     },
     {
       question: "Is Pricer suitable for small businesses and startups?",
       answer:
-        "Absolutely! Pricer is designed to help businesses of all sizes, especially startups looking to establish competitive and profitable pricing strategies.",
+        "Yes! Pricer is designed to help businesses of all sizes, from startups to enterprise companies. We offer flexible pricing plans that scale with your business, making advanced pricing intelligence accessible to companies at any stage of growth.",
+      category: "Pricing"
     },
     {
       question: "What makes Pricer different from other pricing tools?",
       answer:
-        "Unlike standard pricing tools, Pricer leverages AI to analyze competitor pricing, market trends, and demand elasticity, offering strategic insights rather than just static price suggestions.",
+        "Unlike standard pricing tools, Pricer leverages cutting-edge AI to analyze competitor pricing, market trends, and demand elasticity. We provide strategic insights rather than just static price suggestions, with real-time market monitoring and predictive analytics.",
+      category: "Comparison"
     },
+    {
+      question: "How secure is my pricing data with Pricer?",
+      answer:
+        "Security is our top priority. We use enterprise-grade encryption, are SOC 2 Type II certified, GDPR compliant, and follow industry best practices for data protection. Your pricing data is encrypted both in transit and at rest.",
+      category: "Security"
+    },
+    {
+      question: "What kind of support do you provide?",
+      answer:
+        "We offer comprehensive support including 24/7 technical support, dedicated account managers for enterprise clients, extensive documentation, video tutorials, and regular webinars. Our team is committed to helping you maximize the value of our platform.",
+      category: "Support"
+    }
   ];
+
+  const categories = [...new Set(faq_questions.map(faq => faq.category))];
+
+  const toggleFAQ = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   return (
-    <div className="max-w-[1200px] mx-auto py-24 ">
-      <div className="flex flex-col gap-16 mx-10">
-        <div className="flex justify-center flex-col items-center w-[60%] max-md:w-[100%] mx-auto gap-4 max-lg:w-[80%] max-xl:w-[60%]">
-          <h1 className="text-5xl max-md:text-3xl max-sm:text-2xl max-lg:text-3xl max-xl:text-4xl">Frequently Asked Questions</h1>
-          <p className="text-center max-md:text-sm max-sm:text-xs max-lg:text-base max-xl:text-lg">
-            Get clear, data-driven answers to your pricing questions. Explore
-            our FAQ section for insights on optimizing your product pricing and
-            maximizing revenue.
+    <div className="py-20 px-6">
+      <div className="max-w-6xl mx-auto">
+        {/* Header Section */}
+        <div className="text-center space-y-6 mb-16">
+          <div className="inline-flex items-center gap-3 bg-neon-purple/10 border border-neon-purple/30 px-6 py-3 rounded-full text-sm">
+            <FaQuestionCircle className="text-neon-purple text-lg" />
+            <span className="text-neon-purple font-semibold">Frequently Asked Questions</span>
+          </div>
+          
+          <h1 className="text-5xl md:text-6xl font-bold gradient-text animate-fade-in">
+            Got Questions?
+          </h1>
+          
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Find answers to common questions about our AI-powered pricing platform. 
+            Can't find what you're looking for? <span className="text-neon-blue">Contact our support team</span>.
           </p>
         </div>
-        <div className="flex flex-col gap-4">
-          {faq_questions.map((faq, index) => (
-            <details
-              key={index}
-              className="bg-purple-200 max-md:text-sm max-sm:text-xs text-purple-800 hover:bg-purple-300 p-4 flex flex-col gap-4 rounded-lg cursor-pointer"
+
+        {/* Category Filter */}
+        <div className="flex flex-wrap justify-center gap-3 mb-12">
+          <button 
+            onClick={() => setOpenIndex(null)}
+            className="btn-glass px-6 py-2 text-sm"
+          >
+            All Questions
+          </button>
+          {categories.map((category) => (
+            <button 
+              key={category}
+              className="btn-neon-outline px-6 py-2 text-sm"
             >
-              <summary className="text-2xl max-md:text-sm max-sm:text-xs max-lg:text-base max-xl:text-lg">{faq.question}</summary>
-              <p className="mx-6 max-md:text-sm max-sm:text-xs max-lg:text-sm max-xl:text-base">{faq.answer}</p>
-            </details>
+              {category}
+            </button>
           ))}
+        </div>
+
+        {/* FAQ Items */}
+        <div className="space-y-4">
+          {faq_questions.map((faq, index) => (
+            <div 
+              key={index}
+              className={`bg-dark-800/30 backdrop-blur-lg border border-neon-blue/20 rounded-2xl group transition-all duration-300 ${
+                openIndex === index ? 'ring-2 ring-neon-blue/50 border-neon-blue/50' : 'hover:border-neon-purple/50'
+              }`}
+            >
+              <button
+                onClick={() => toggleFAQ(index)}
+                className="w-full p-6 text-left flex items-center justify-between hover:bg-neon-blue/5 transition-colors duration-300"
+              >
+                <div className="flex-1 pr-4">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-xs bg-neon-blue/20 text-neon-blue px-2 py-1 rounded-full">
+                      {faq.category}
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-semibold text-white group-hover:text-neon-blue transition-colors">
+                    {faq.question}
+                  </h3>
+                </div>
+                
+                <div className="flex-shrink-0">
+                  <div className={`w-8 h-8 rounded-full bg-gradient-to-br from-neon-blue to-neon-purple flex items-center justify-center transition-transform duration-300 ${
+                    openIndex === index ? 'rotate-180' : ''
+                  }`}>
+                    {openIndex === index ? (
+                      <FaChevronUp className="text-white text-sm" />
+                    ) : (
+                      <FaChevronDown className="text-white text-sm" />
+                    )}
+                  </div>
+                </div>
+              </button>
+              
+              <div className={`overflow-hidden transition-all duration-300 ${
+                openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+              }`}>
+                <div className="px-6 pb-6">
+                  <div className="border-t border-gray-700 pt-4">
+                    <p className="text-gray-300 leading-relaxed text-lg">
+                      {faq.answer}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Contact CTA */}
+        <div className="text-center mt-16">
+          <div className="card-glass p-8 max-w-2xl mx-auto">
+            <h3 className="text-2xl font-bold gradient-text mb-4">
+              Still have questions?
+            </h3>
+            <p className="text-gray-300 mb-6">
+              Our support team is here to help you get the most out of Pricer.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="btn-neon px-8 py-3">
+                <span>Contact Support</span>
+              </button>
+              <button className="btn-glass px-8 py-3">
+                <span>Schedule Demo</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

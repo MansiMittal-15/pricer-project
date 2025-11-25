@@ -45,103 +45,148 @@ const Login = () => {
   return (
     <>
       <Header />
-      <div className="max-w-[1200px] mx-auto">
-        <div className="mx-[24px] flex my-10 border-2 border-black ">
-          <div
-            className="w-[50%] flex flex-col items-center justify-center gap-6"
-            style={{
-              backgroundImage: `url(${white_bg})`,
-            }}
-          >
-            <div className="flex flex-col items-center gap-2">
-              <FiLogIn className="text-purple-800 text-4xl" />
-              <h1 className="text-4xl font-semibold">Welcome Back!</h1>
-              <p className="text-sm">
-                Welcome back! Please enter your details.
-              </p>
-            </div>
-            <div className="w-[70%] flex flex-col items-center gap-4 text-sm">
-              <div className="flex flex-col w-[80%] gap-2 font-semibold ">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  className="outline-none rounded-lg p-2 bg-white outline-black/20"
-                  placeholder="Enter your email.."
-                  id="email"
-                  name="email"
-                  value={user.email}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="flex flex-col w-[80%] gap-2 font-semibold relative justify-center">
-                <label htmlFor="password">Password</label>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Enter password here.."
-                  className="outline-none rounded-lg p-2 outline-black/20"
-                  id="password"
-                  name="password"
-                  value={user.password}
-                  onChange={handleInputChange}
-                />
-                <span
-                  className="absolute right-2 top-12 -translate-y-1/2 cursor-pointer"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? (
-                    <FaEyeSlash className="text-black/50 text-lg" />
-                  ) : (
-                    <FaEye className="text-black/50 text-lg" />
-                  )}
-                </span>
-              </div>
-              <div className="flex justify-between w-[80%] gap-2 font-semibold ">
-                <div className="flex items-center gap-1">
-                  <input type="checkbox" id="checkbox" />
-                  <label htmlFor="checkbox">Remember for 30 days</label>
+      <div className="min-h-screen pt-8 pb-16">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="bg-dark-900/50 backdrop-blur-lg border border-neon-blue/20 rounded-3xl overflow-hidden shadow-glass">
+            <div className="grid md:grid-cols-2 gap-0">
+              {/* Left side - Form */}
+              <div className="p-12 space-y-8">
+                <div className="text-center space-y-4">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-neon-blue to-neon-purple rounded-2xl animate-float">
+                    <FiLogIn className="text-white text-2xl" />
+                  </div>
+                  <h1 className="text-4xl font-bold gradient-text">Welcome Back!</h1>
+                  <p className="text-gray-400">
+                    Enter your credentials to access your dashboard
+                  </p>
                 </div>
-                <div>
-                  <Link to="/" className="font-semibold text-purple-800">
-                    Forgot Password
+
+                <form className="space-y-6">
+                  <div className="space-y-2">
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={user.email}
+                      onChange={handleInputChange}
+                      className="input-neon w-full"
+                      placeholder="Enter your email address"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label htmlFor="password" className="block text-sm font-medium text-gray-300">
+                      Password
+                    </label>
+                    <div className="relative">
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        id="password"
+                        name="password"
+                        value={user.password}
+                        onChange={handleInputChange}
+                        className="input-neon w-full pr-12"
+                        placeholder="Enter your password"
+                      />
+                      <button
+                        type="button"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-neon-blue transition-colors"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? <FaEyeSlash className="text-lg" /> : <FaEye className="text-lg" />}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between text-sm">
+                    <label className="flex items-center gap-2 text-gray-300 cursor-pointer">
+                      <input type="checkbox" className="w-4 h-4 text-neon-blue bg-dark-800 border-neon-blue/30 rounded focus:ring-neon-blue/20" />
+                      Remember me for 30 days
+                    </label>
+                    <Link to="/" className="text-neon-blue hover:text-neon-purple transition-colors">
+                      Forgot Password?
+                    </Link>
+                  </div>
+
+                  <div className="space-y-4">
+                    <button
+                      type="button"
+                      onClick={handleLogin}
+                      disabled={isLoading}
+                      className="btn-neon w-full text-lg py-4"
+                    >
+                      {isLoading ? (
+                        <span className="flex items-center gap-2 justify-center">
+                          <div className="spinner"></div>
+                          Signing in...
+                        </span>
+                      ) : (
+                        <span>Sign In</span>
+                      )}
+                    </button>
+
+                    <div className="relative">
+                      <div className="absolute inset-0 flex items-center">
+                        <div className="w-full border-t border-gray-600"></div>
+                      </div>
+                      <div className="relative flex justify-center text-sm">
+                        <span className="px-4 bg-dark-900 text-gray-400">Or continue with</span>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      className="btn-glass w-full text-lg py-4 flex items-center justify-center gap-3"
+                    >
+                      <FaGoogle className="text-xl" />
+                      <span>Google</span>
+                    </button>
+                  </div>
+                </form>
+
+                <div className="text-center text-gray-400">
+                  Don't have an account?{" "}
+                  <Link to="/signup" className="text-neon-blue hover:text-neon-purple font-semibold transition-colors">
+                    Sign up here
                   </Link>
                 </div>
               </div>
-              <div className="flex w-[100%] justify-center ">
-                <button
-                  onClick={handleLogin}
-                  className="bg-purple-800 text-white w-[80%] p-2 rounded-lg text-lg hover:bg-purple-900"
-                >
-                  {isLoading ? (
-                    <span className="flex items-center gap-2 justify-center">
-                      Signing in... <FaSpinner className="animate-spin" />
-                    </span>
-                  ) : (
-                    "Sign in"
-                  )}
-                </button>
-              </div>
-              <div className="flex w-[100%] justify-center ">
-                <button className="bg-white/70 border-2 border-black/30 text-black font-semibold w-[80%] p-2 rounded-lg text-lg flex justify-center items-center gap-2">
-                  <span>
-                    <FaGoogle />
-                  </span>
-                  Sign in with Google
-                </button>
+
+              {/* Right side - Image/Branding */}
+              <div className="relative bg-gradient-to-br from-neon-blue/20 to-neon-purple/20 flex items-center justify-center p-12">
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-neon-blue/5 to-neon-purple/10"></div>
+                <div className="relative text-center space-y-6">
+                  <div className="w-48 h-48 mx-auto bg-gradient-to-br from-neon-blue to-neon-purple rounded-full flex items-center justify-center animate-float">
+                    <div className="w-32 h-32 bg-white/20 backdrop-blur-lg rounded-full flex items-center justify-center">
+                      <span className="text-4xl font-bold text-white">P</span>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <h2 className="text-3xl font-bold gradient-text">Join the Future</h2>
+                    <p className="text-gray-300 text-lg">
+                      Experience next-generation pricing intelligence with our advanced SaaS platform
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-1 gap-4 text-left">
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-neon-green rounded-full"></div>
+                      <span className="text-gray-300">Real-time Analytics</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-neon-blue rounded-full"></div>
+                      <span className="text-gray-300">AI-Powered Insights</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-neon-purple rounded-full"></div>
+                      <span className="text-gray-300">Enterprise Security</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div>
-              <div>
-                Don't have an Account?{" "}
-                <span>
-                  <Link to="/signup" className="text-purple-800 font-semibold">
-                    Sign up
-                  </Link>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="w-[50%]">
-            <img src={purpleImage} alt="purple image" />
           </div>
         </div>
       </div>

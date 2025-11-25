@@ -47,110 +47,146 @@ const Signup = () => {
   return (
     <>
       <Header />
-      <div className="max-w-[1200px] mx-auto ">
-        <div
-          className="mx-[24px] py-10 flex flex-col items-center gap-6 "
-          style={{
-            backgroundImage: `url(${white_bg})`,
-          }}
-        >
-          <div className="flex flex-col items-center gap-2">
-            <FaUserPlus className="text-purple-800 text-4xl" />
-            <h1 className="text-4xl font-semibold">Create an Account!</h1>
-            <p className="text-sm">
-              Welcome! Enter your details to start Prediction.
-            </p>
-          </div>
-          <div className="w-[70%] flex flex-col items-center gap-6 text-sm">
-            <div className="flex flex-col w-[80%] gap-2 font-semibold">
-              <label htmlFor="fullname">Full Name</label>
-              <input
-                type="text"
-                className="outline-none rounded-lg p-2 bg-white outline-black/20"
-                placeholder="Enter your fullname.."
-                id="fullname"
-                name="fullname"
-                value={user.fullname}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="flex flex-col w-[80%] gap-2 font-semibold">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                className="outline-none rounded-lg p-2 bg-white outline-black/20"
-                placeholder="Enter your email.."
-                id="email"
-                name="email"
-                value={user.email}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="flex flex-col w-[80%] gap-2 font-semibold ">
-              <label htmlFor="phoneNumber">Phone Number</label>
-              <input
-                type="text"
-                className="outline-none rounded-lg p-2 bg-white outline-black/20"
-                placeholder="Enter your Phone Number.."
-                id="phoneNumber"
-                name="phoneNumber"
-                value={user.phoneNumber}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="flex flex-col w-[80%] gap-2 font-semibold relative justify-center ">
-              <label htmlFor="password">Password</label>
-              <input
-                type={showPassword ? "text" : "password"}
-                className="outline-none rounded-lg p-2 bg-white outline-black/20"
-                placeholder="Enter your password.."
-                id="password"
-                name="password"
-                value={user.password}
-                onChange={handleInputChange}
-              />
-              <span
-                className="absolute right-2 top-12 -translate-y-1/2 cursor-pointer"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? (
-                  <FaEyeSlash className="text-black/50 text-lg" />
-                ) : (
-                  <FaEye className="text-black/50 text-lg" />
-                )}
-              </span>
-            </div>
-            <div className="flex w-[100%] justify-center pt-2 ">
-              <button
-                onClick={handleSignup}
-                className="bg-purple-800 text-white w-[80%] p-2 rounded-lg text-lg hover:bg-purple-900"
-              >
-                {isLoading ? (
-                  <span className="flex items-center justify-center gap-2">
-                    Signing Up... <FaSpinner className="animate-spin" />
-                  </span>
-                ) : (
-                  "Sign Up"
-                )}
-              </button>
-            </div>
-            <div className="flex w-[100%] justify-center ">
-              <button className="bg-white/70 border-2 items-center border-black/30 text-black font-semibold w-[80%] p-2 rounded-lg text-lg flex justify-center gap-2">
-                <span>
-                  <FaGoogle />
-                </span>
-                Sign up with Google
-              </button>
-            </div>
-          </div>
-          <div>
-            <div>
-              Already have an Account?{" "}
-              <span>
-                <Link to="/login" className="text-purple-800 font-semibold">
-                  Sign in
+      <div className="min-h-screen pt-8 pb-16">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="bg-dark-900/50 backdrop-blur-lg border border-neon-blue/20 rounded-3xl overflow-hidden shadow-glass">
+            <div className="p-12 space-y-8">
+              <div className="text-center space-y-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-neon-purple to-neon-pink rounded-2xl animate-float">
+                  <FaUserPlus className="text-white text-2xl" />
+                </div>
+                <h1 className="text-4xl font-bold gradient-text">Join Pricer Today!</h1>
+                <p className="text-gray-400">
+                  Create your account and start your pricing intelligence journey
+                </p>
+              </div>
+
+              <form className="space-y-6 max-w-2xl mx-auto">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label htmlFor="fullname" className="block text-sm font-medium text-gray-300">
+                      Full Name
+                    </label>
+                    <input
+                      type="text"
+                      id="fullname"
+                      name="fullname"
+                      value={user.fullname}
+                      onChange={handleInputChange}
+                      className="input-neon w-full"
+                      placeholder="Enter your full name"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-300">
+                      Phone Number
+                    </label>
+                    <input
+                      type="text"
+                      id="phoneNumber"
+                      name="phoneNumber"
+                      value={user.phoneNumber}
+                      onChange={handleInputChange}
+                      className="input-neon w-full"
+                      placeholder="Enter your phone number"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={user.email}
+                    onChange={handleInputChange}
+                    className="input-neon w-full"
+                    placeholder="Enter your email address"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="password" className="block text-sm font-medium text-gray-300">
+                    Password
+                  </label>
+                  <div className="relative">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      id="password"
+                      name="password"
+                      value={user.password}
+                      onChange={handleInputChange}
+                      className="input-neon w-full pr-12"
+                      placeholder="Create a strong password"
+                    />
+                    <button
+                      type="button"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-neon-blue transition-colors"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? <FaEyeSlash className="text-lg" /> : <FaEye className="text-lg" />}
+                    </button>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <button
+                    type="button"
+                    onClick={handleSignup}
+                    disabled={isLoading}
+                    className="btn-neon w-full text-lg py-4"
+                  >
+                    {isLoading ? (
+                      <span className="flex items-center gap-2 justify-center">
+                        <div className="spinner"></div>
+                        Creating Account...
+                      </span>
+                    ) : (
+                      <span>Create Account</span>
+                    )}
+                  </button>
+
+                  <div className="relative">
+                    <div className="absolute inset-0 flex items-center">
+                      <div className="w-full border-t border-gray-600"></div>
+                    </div>
+                    <div className="relative flex justify-center text-sm">
+                      <span className="px-4 bg-dark-900 text-gray-400">Or continue with</span>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="btn-glass w-full text-lg py-4 flex items-center justify-center gap-3"
+                  >
+                    <FaGoogle className="text-xl" />
+                    <span>Google</span>
+                  </button>
+                </div>
+              </form>
+
+              <div className="text-center text-gray-400">
+                Already have an account?{" "}
+                <Link to="/login" className="text-neon-blue hover:text-neon-purple font-semibold transition-colors">
+                  Sign in here
                 </Link>
-              </span>
+              </div>
+
+              {/* Terms and Privacy */}
+              <div className="text-center text-sm text-gray-500">
+                By creating an account, you agree to our{" "}
+                <Link to="#" className="text-neon-blue hover:text-neon-purple transition-colors">
+                  Terms of Service
+                </Link>{" "}
+                and{" "}
+                <Link to="#" className="text-neon-blue hover:text-neon-purple transition-colors">
+                  Privacy Policy
+                </Link>
+              </div>
             </div>
           </div>
         </div>

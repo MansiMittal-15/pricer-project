@@ -9,41 +9,94 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <div
-      className=" h-[90%] text-white flex"
-      style={{
-        backgroundImage: `url(${bg_image})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        zIndex: "-10",
-      }}
-    >
-      <div className=" w-full mx-auto text-black/80 flex cursor-text max-sm:text-sm">
-        <div className="max-w-[1200px] mx-auto h-[inherit] flex flex-col items-center justify-center gap-4 py-10">
-          <div className="text-sm bg-slate-200 max-sm:text-[10px] text-black p-2 border rounded-3xl flex gap-2 justify-center items-center">
-            <span>
-              <img src={greenTick} alt="green tick" className="w-6 max-sm:w-4" />
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden py-4">
+      {/* Animated Background */}
+      <div className="absolute inset-0 animated-bg"></div>
+
+      {/* Overlay with gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-dark-950/50 via-transparent to-dark-950/50"></div>
+
+      {/* Floating particles effect */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-20 w-2 h-2 bg-neon-blue rounded-full animate-float opacity-70"></div>
+        <div
+          className="absolute top-40 right-32 w-1 h-1 bg-neon-purple rounded-full animate-float opacity-60"
+          style={{ animationDelay: "1s" }}
+        ></div>
+        <div
+          className="absolute bottom-32 left-1/4 w-1.5 h-1.5 bg-neon-pink rounded-full animate-float opacity-80"
+          style={{ animationDelay: "2s" }}
+        ></div>
+        <div
+          className="absolute top-1/3 right-20 w-1 h-1 bg-neon-green rounded-full animate-float opacity-50"
+          style={{ animationDelay: "3s" }}
+        ></div>
+        <div
+          className="absolute bottom-40 right-1/3 w-2 h-2 bg-neon-cyan rounded-full animate-float opacity-70"
+          style={{ animationDelay: "4s" }}
+        ></div>
+      </div>
+
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6">
+        <div className="text-center space-y-8 animate-fade-in">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-lg border border-neon-blue/30 px-6 py-3 rounded-full text-sm animate-bounce-soft">
+            <img src={greenTick} alt="check" className="w-5 h-5" />
+            <span className="text-neon-blue font-semibold">#1</span>
+            <span className="text-gray-300">
+              Real-Time Price Intelligence Platform
             </span>
-            <span className="text-purple-700">No. 1</span> Real-Time Price Recommender
           </div>
-          <div className="text-7xl font-bold text-center max-sm:text-3xl max-md:text-4xl max-lg:text-5xl">
-            Real-Time <br /> <span className="text-purple-700">Price Recommendations</span> <br />
+
+          {/* Main Heading */}
+          <div className="space-y-4">
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight">
+              <span className="block text-white">Smart Pricing</span>
+              <span className="block gradient-text animate-pulse-neon">
+                Revolution
+              </span>
+            </h1>
+
+            <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+              Transform your revenue strategy with AI-powered pricing
+              recommendations.
+              <span className="text-neon-blue">
+                {" "}
+                Real-time competitor analysis
+              </span>
+              , demand forecasting, and customer behavior insights.
+            </p>
           </div>
-          <div className="text-xl text-center max-sm:text-xs max-lg:text-lg font-normal max-md:text-sm">
-            Maximize revenue with recommendations fueled by current competitor
-            pricing, product demand, and customer preferences.
-          </div>
-          <div className="flex gap-6 max-sm:gap-2 max-md:gap-4">
-            <Link to={"/dataForm"}>
-              <button className="border-[2px] max-lg:w-40 max-md:text-sm max-md:w-32 max-sm:text-xs max-sm:w-24 border-black p-2 text-lg w-52 rounded-xl bg-purple-700/90 text-white hover:bg-purple-800  ">
-                Get Started
-              </button>
-            </Link>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
+            <a href="https://shubh1502-pricer.hf.space/" target="_blank" >
+              <div className="btn-neon text-lg px-8 py-4 min-w-[200px] ">
+                Start Free Trial
+              </div>
+            </a>
+
             <Link to={"/features"}>
-              <button className="border-[2px] max-lg:w-40 max-md:text-sm max-md:w-32 max-sm:text-xs max-sm:w-24 border-black p-2 text-lg w-52 rounded-xl bg-white text-black hover:bg-slate-200  ">
-                Learn More
+              <button className="btn-glass text-lg px-8 py-4 min-w-[200px]">
+                <span>Explore Features</span>
               </button>
             </Link>
+          </div>
+
+          {/* Stats or Social Proof */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-16 max-w-4xl mx-auto">
+            <div className="card-glass p-6 text-center">
+              <div className="text-3xl font-bold gradient-text">500+</div>
+              <div className="text-gray-400 mt-2">Enterprise Clients</div>
+            </div>
+            <div className="card-glass p-6 text-center">
+              <div className="text-3xl font-bold gradient-text">15%</div>
+              <div className="text-gray-400 mt-2">Average Revenue Increase</div>
+            </div>
+            <div className="card-glass p-6 text-center">
+              <div className="text-3xl font-bold gradient-text">99.9%</div>
+              <div className="text-gray-400 mt-2">Uptime Guarantee</div>
+            </div>
           </div>
         </div>
       </div>

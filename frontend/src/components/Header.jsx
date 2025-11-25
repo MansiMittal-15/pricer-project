@@ -66,86 +66,84 @@ const Header = () => {
         />
       )}
 
-      {/* <div className="text-xl text-white bg-slate-950 py-5 px-5 sticky top-0 z-20"> */}
-      <div className="text-xl text-black bg-white py-5 px-5 sticky top-0 z-20 border-b-2">
-        <div className="max-w-7xl mx-auto flex justify-between ">
-          <div className="flex items-center gap-16 max-lg:gap-6 ">
+      {/* Modern SaaS Header with neon effects */}
+      <div className="bg-dark-950/95 backdrop-blur-lg border-b border-neon-blue/20 py-4 px-5 sticky top-0 z-50 animate-fade-in">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <div className="flex items-center gap-16 max-lg:gap-6">
             <div className="flex items-center gap-4">
-              <FaBars onClick={() => navigate("/mobileNavigation")} className="text-purple-700 text-2xl cursor-pointer hidden max-md:block" />
-              <p className="text-3xl text-purple-700 font-bold max-sm:text-xl max-md:text-2xl">
-                <Link to={"/"}>Pricer</Link>
-              </p>
+              <FaBars 
+                onClick={() => navigate("/mobileNavigation")} 
+                className="text-neon-blue text-2xl cursor-pointer hidden max-md:block hover:text-neon-purple transition-colors duration-300" 
+              />
+              <div className="text-3xl font-bold max-sm:text-xl max-md:text-2xl">
+                <Link to={"/"} className="gradient-text hover:animate-pulse-neon transition-all duration-300">
+                  Pricer
+                </Link>
+              </div>
             </div>
-            <div className="flex gap-6 max-md:hidden">
-              <div className=" hover:text-slate-500 cursor-pointer font-semibold">
-                <Link
-                  to={"/contact"}
-                  className="text-purple-500 hover:text-purple-700"
-                >
-                  Contact
-                </Link>
-              </div>
-              <div className=" hover:text-slate-500 cursor-pointer font-semibold">
-                <Link
-                  to="/features"
-                  className="text-purple-500 hover:text-purple-700"
-                >
-                  Features
-                </Link>
-              </div>
+            <nav className="flex gap-8 max-md:hidden">
+              <Link to={"/contact"} className="nav-link">
+                Contact
+              </Link>
+              <Link to="/features" className="nav-link">
+                Features
+              </Link>
               <div
-                className=" hover:text-purple-700/90 text-purple-500 cursor-pointer font-semibold z-100 flex items-center gap-1"
+                className="nav-link cursor-pointer flex items-center gap-1"
                 onClick={(e) =>
                   handleToggleDropDown(e, "jobs", [
                     "Free Trial",
-                    "Usage-Based Pricing",
+                    "Usage-Based Pricing", 
                     "Price Comparison",
                     "Billing FAQs",
                   ])
                 }
               >
                 Pricing
-                <FaAngleDown className="text-purple-500 hover:text-purple-700" />
+                <FaAngleDown className="text-sm transition-transform duration-300 hover:rotate-180" />
               </div>
               <div
-                className=" hover:text-purple-700/90 text-purple-500 cursor-pointer font-semibold flex items-center gap-1"
+                className="nav-link cursor-pointer flex items-center gap-1"
                 onClick={(e) =>
                   handleToggleDropDown(e, "services", [
                     "Consulting Services",
-                    "Support Services",
+                    "Support Services", 
                     "Training and Development",
                   ])
                 }
               >
                 Services
-                <FaAngleDown className="text-purple-500 hover:text-purple-700" />
+                <FaAngleDown className="text-sm transition-transform duration-300 hover:rotate-180" />
               </div>
-            </div>
+            </nav>
           </div>
+          
           {user ? (
             <div className="flex gap-4 items-center">
-              <p className="text-purple-500 hover:text-purple-700">
-                {" "}
-                {user?.fullname}
+              <p className="text-gray-300 hover:text-neon-blue transition-colors">
+                Welcome, {user?.fullname}
               </p>
-              <FaUserCircle className="text-purple-500 text-4xl hover:text-purple-700" />
+              <div className="relative">
+                <FaUserCircle className="text-neon-blue text-4xl hover:text-neon-purple transition-colors animate-bounce-soft" />
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-neon-green rounded-full animate-pulse"></div>
+              </div>
               <button
                 onClick={handleLogout}
-                className=" border-[2px] border-black p-2 text-lg rounded-xl bg-purple-700/90 w-28 text-white hover:bg-purple-800  "
+                className="btn-neon-outline min-w-[100px] text-sm"
               >
-                Logout
+                <span>Logout</span>
               </button>
             </div>
           ) : (
-            <div className="flex gap-4">
+            <div className="flex gap-3">
               <Link to={"/login"}>
-                <button className="border-[2px] w-28 max-sm:w-20 max-sm:text-sm border-black p-2 text-lg rounded-xl bg-purple-700/90 text-white hover:bg-purple-800  ">
-                  Sign In
+                <button className="btn-neon min-w-[100px] max-sm:min-w-[80px] text-sm">
+                  <span>Sign In</span>
                 </button>
               </Link>
               <Link to={"/signup"}>
-                <button className="border-[2px] w-28 max-sm:w-20 max-sm:text-sm border-black p-2 text-lg rounded-xl bg-white text-black hover:bg-slate-200  ">
-                  SignUp
+                <button className="btn-glass min-w-[100px] max-sm:min-w-[80px] text-sm">
+                  <span>Sign Up</span>
                 </button>
               </Link>
             </div>
