@@ -1,4 +1,7 @@
+
 import React, { useState } from "react";
+// 🔑 SEO: Import Helmet for managing the document head
+import { Helmet } from "react-helmet-async"; 
 import purpleImage from "../assets/purple_image.jpeg";
 import white_bg from "../assets/white_bg2.jpg";
 import { Link, useNavigate } from "react-router-dom";
@@ -37,6 +40,12 @@ const Login = () => {
     }
   };
 
+  // 🔑 SEMANTIC: New function to handle the native form submission event
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevents default form refresh
+    handleLogin();
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
@@ -44,6 +53,21 @@ const Login = () => {
 
   return (
     <>
+      {/* 1. 🔑 HEAD MANAGER: Helmet for Title, Description, and Indexing Control */}
+      <Helmet>
+        {/* Title: Concise and descriptive (Crucial) */}
+        <title>Login to Your Account | [Your App Name]</title>
+        
+        {/* Meta Description: Provides a summary for search results */}
+        <meta 
+          name="description" 
+          content="Securely sign in to access your dashboard, orders, and personalized features on [Your App Name]." 
+        />
+        
+        {/* Control Indexing: Recommended for login pages to keep them out of search results */}
+        <meta name="robots" content="noindex, follow" />
+      </Helmet>
+      
       <Header />
       <div className="max-w-[1200px] mx-auto">
         <div className="mx-[24px] flex my-10 border-2 border-black ">
@@ -55,13 +79,18 @@ const Login = () => {
           >
             <div className="flex flex-col items-center gap-2">
               <FiLogIn className="text-purple-800 text-4xl" />
+              {/* Heading Hierarchy: Use a clear <h1> for the page topic */}
               <h1 className="text-4xl font-semibold">Welcome Back!</h1>
               <p className="text-sm">
                 Welcome back! Please enter your details.
               </p>
             </div>
-            <div className="w-[70%] flex flex-col items-center gap-4 text-sm">
+            
+            {/* 2. 🔑 SEMANTIC HTML: Use a proper <form> element for accessibility and function */}
+            <form onSubmit={handleSubmit} className="w-[70%] flex flex-col items-center gap-4 text-sm">
+                
               <div className="flex flex-col w-[80%] gap-2 font-semibold ">
+                {/* Semantic Input: label htmlFor matches input id */}
                 <label htmlFor="email">Email</label>
                 <input
                   type="email"
@@ -71,8 +100,10 @@ const Login = () => {
                   name="email"
                   value={user.email}
                   onChange={handleInputChange}
+                  required // Good for UX/validation
                 />
               </div>
+              
               <div className="flex flex-col w-[80%] gap-2 font-semibold relative justify-center">
                 <label htmlFor="password">Password</label>
                 <input
@@ -83,10 +114,13 @@ const Login = () => {
                   name="password"
                   value={user.password}
                   onChange={handleInputChange}
+                  required // Good for UX/validation
                 />
                 <span
                   className="absolute right-2 top-12 -translate-y-1/2 cursor-pointer"
                   onClick={() => setShowPassword(!showPassword)}
+                  // 🔑 ACCESSIBILITY: Add aria-label for screen readers
+                  aria-label={showPassword ? "Hide password" : "Show password"} 
                 >
                   {showPassword ? (
                     <FaEyeSlash className="text-black/50 text-lg" />
@@ -95,20 +129,24 @@ const Login = () => {
                   )}
                 </span>
               </div>
+              
               <div className="flex justify-between w-[80%] gap-2 font-semibold ">
                 <div className="flex items-center gap-1">
                   <input type="checkbox" id="checkbox" />
                   <label htmlFor="checkbox">Remember for 30 days</label>
                 </div>
                 <div>
+                  {/* Internal Link */}
                   <Link to="/" className="font-semibold text-purple-800">
                     Forgot Password
                   </Link>
                 </div>
               </div>
+              
               <div className="flex w-[100%] justify-center ">
                 <button
-                  onClick={handleLogin}
+                  type="submit" // 🔑 SEMANTIC: Ensures pressing Enter submits the form
+                  disabled={isLoading} // Good UX to prevent double submission
                   className="bg-purple-800 text-white w-[80%] p-2 rounded-lg text-lg hover:bg-purple-900"
                 >
                   {isLoading ? (
@@ -120,15 +158,16 @@ const Login = () => {
                   )}
                 </button>
               </div>
-              <div className="flex w-[100%] justify-center ">
-                <button className="bg-white/70 border-2 border-black/30 text-black font-semibold w-[80%] p-2 rounded-lg text-lg flex justify-center items-center gap-2">
-                  <span>
-                    <FaGoogle />
-                  </span>
-                  Sign in with Google
-                </button>
-              </div>
+            </form>
+            
+            {/* Social Login Button (Can remain a separate button) */}
+            <div className="flex w-[100%] justify-center ">
+              <button className="bg-white/70 border-2 border-black/30 text-black font-semibold w-[80%] p-2 rounded-lg text-lg flex justify-center items-center gap-2">
+                <span><FaGoogle /></span>
+                Sign in with Google
+              </button>
             </div>
+            
             <div>
               <div>
                 Don't have an Account?{" "}
@@ -140,8 +179,10 @@ const Login = () => {
               </div>
             </div>
           </div>
+          
           <div className="w-[50%]">
-            <img src={purpleImage} alt="purple image" />
+            {/* 3. 🔑 ACCESSIBILITY: More descriptive alt text for non-functional images */}
+            <img src={purpleImage} alt="Decorative background illustration for the login form" />
           </div>
         </div>
       </div>
@@ -151,3 +192,4 @@ const Login = () => {
 };
 
 export default Login;
+
