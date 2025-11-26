@@ -13,7 +13,7 @@ app.use(cookieParser());
 // app.use(express.urlencoded({extended: true}));
 app.use(bodyParser.urlencoded({extended: true}));
 const corsOptions = {
-    origin: ["http://localhost:5173", "https://pricer-project.vercel.app/"],
+    origin: ["http://localhost:5173", "https://pricer-project.vercel.app"],
     credentials: true,
 };
 app.use(cors(corsOptions))
