@@ -50,7 +50,7 @@ const Header = () => {
   }, [dropDownConfig.isOpen]);
 
   const handleLogout = async () => {
-    await logout();
+    localStorage.removeItem("token");
     dispatch(setUser(null));
     toast.success("Logged out successfully");
     navigate("/login");

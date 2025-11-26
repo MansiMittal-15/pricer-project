@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import purpleImage from "../assets/purple_image.jpeg";
-import white_bg from "../assets/white_bg2.jpg";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaGoogle, FaSpinner } from "react-icons/fa";
 import Header from "../components/Header";
@@ -29,6 +27,7 @@ const Login = () => {
         toast.success(response?.data?.message);
       }
       dispatch(setUserAction(response?.data?.user));
+      localStorage.setItem("token", response.data.token);
       navigate("/");
     } catch (error) {
       toast.error(error?.response?.data?.message ? error?.response?.data?.message : error?.message);
