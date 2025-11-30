@@ -1,101 +1,122 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { FaAngleDown, FaTimes } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import Dropdown from "./Dropdown";
+import { Helmet } from "react-helmet-async"; // 1. Import Helmet
 
-const MobileNavigation = () => {
-  const dropDownRef = useRef(null);
-  const [dropDownConfig, setDropDownConfig] = useState({
-    isOpen: false,
-    position: { left: 0, top: 0 },
-    items: [],
-    name: "",
-  });
+const MobileNavigation = ({ onClose }) => {
+  // ... (State and functions remain the same)
+  const [openSubmenu, setOpenSubmenu] = useState(null);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropDownRef.current && !dropDownRef.current.contains(event.target)) {
-        setDropDownConfig((prev) => ({ ...prev, isOpen: false }));
-      }
-    };
+  const navItems = [
+    { name: "Contact", path: "/contact", type: "link" },
+    { name: "Features", path: "/features", type: "link" },
+    {
+      name: "Pricing",
+      type: "submenu",
+      items: [
+        { label: "Free Trial", path: "/pricing/trial" },
+        { label: "Usage-Based Pricing", path: "/pricing/usage" },
+        { label: "Price Comparison", path: "/pricing/comparison" },
+        { label: "Billing FAQs", path: "/pricing/faqs" },
+      ],
+    },
+    {
+      name: "Services",
+      type: "submenu",
+      items: [
+        { label: "Consulting Services", path: "/services/consulting" },
+        { label: "Support Services", path: "/services/support" },
+        { label: "Training and Development", path: "/services/training" },
+      ],
+    },
+  ];
 
-    if (dropDownConfig.isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [dropDownConfig.isOpen]);
-
-  const handleToggleDropDown = (e, name, items) => {
-    const isSameDropDown =
-      dropDownConfig.isOpen && dropDownConfig.name === name;
-    setDropDownConfig({
-      isOpen: !isSameDropDown,
-      position: { left: e.clientX, top: e.clientY + 20 },
-      items: items,
-      name: name,
-    });
+  const handleToggleSubmenu = (name) => {
+    setOpenSubmenu(openSubmenu === name ? null : name);
   };
 
-  const navigate = useNavigate();
+  const handleNavigation = (path) => {
+    navigate(path);
+    if (onClose) onClose();
+  };
 
   return (
     <>
-      {dropDownConfig?.isOpen && (
-        <Dropdown
-          ref={dropDownRef}
-          items={dropDownConfig.items}
-          position={dropDownConfig.position}
+      {/* 👑 Helmet for Metadata (SEO) 👑 */}
+      {/* This is typically unnecessary for a temporary UI overlay.
+        The SEO tags should be managed by the parent page component.
+        If you must place a generic tag, ensure it doesn't conflict.
+      */}
+      <Helmet>
+        <title>Menu | Pricer</title> 
+      </Helmet>
+
+      <div className="flex flex-col gap-6 m-6 bg-dark-900 text-white min-h-screen">
+        <FaTimes
+          className="text-purple-500 hover:text-purple-700 text-2xl place-self-end cursor-pointer"
+          onClick={onClose || (() => navigate("/"))}
         />
-      )}
-      <div className="flex flex-col gap-6 m-6 ">
-        <FaTimes className="text-purple-500 hover:text-purple-700 text-2xl place-self-end" onClick={()=> navigate("/")} />
-        <div className=" hover:text-slate-500 cursor-pointer font-semibold border-b-2 border-purple-500">
-          <Link
-            to={"/contact"}
-            className="text-purple-500 hover:text-purple-700 "
+
+        <nav className="flex flex-col gap-6">
+          {navItems.map((item) => (
+            <div key={item.name}>
+              {item.type === "link" ? (
+                <div
+                  className="hover:text-purple-700 cursor-pointer font-semibold border-b-2 border-purple-500/50 pb-2"
+                  onClick={() => handleNavigation(item.path)}
+                >
+                  <Link to={item.path} className="text-purple-500 hover:text-purple-700">
+                    {item.name}
+                  </Link>
+                </div>
+              ) : (
+                <div className="text-purple-500 hover:text-purple-700 cursor-pointer font-semibold flex flex-col border-b-2 border-purple-500/50">
+                  <div
+                    className="flex items-center justify-between pb-2"
+                    onClick={() => handleToggleSubmenu(item.name.toLowerCase())}
+                  >
+                    {item.name}
+                    <FaAngleDown
+                      className={`text-purple-500 transition-transform duration-300 ${
+                        openSubmenu === item.name.toLowerCase() ? "rotate-180" : "rotate-0"
+                      }`}
+                    />
+                  </div>
+
+                  {openSubmenu === item.name.toLowerCase() && (
+                    <div className="flex flex-col gap-3 py-3 pl-4 bg-purple-500/10 rounded-b">
+                      {item.items.map((subItem) => (
+                        <Link
+                          key={subItem.label}
+                          to={subItem.path}
+                          onClick={() => handleNavigation(subItem.path)}
+                          className="text-white/80 hover:text-white text-sm"
+                        >
+                          {subItem.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          ))}
+        </nav>
+
+        <div className="mt-8 flex flex-col gap-4">
+          <button
+            className="bg-purple-700 text-white py-3 rounded-lg font-bold hover:bg-purple-800 transition-colors"
+            onClick={() => handleNavigation("/signup")}
           >
-            Contact
-          </Link>
-        </div>
-        <div className=" hover:text-slate-500 cursor-pointer font-semibold border-b-2 border-purple-500">
-          <Link
-            to="/features"
-            className="text-purple-500 hover:text-purple-700"
+            Sign Up
+          </button>
+          <button
+            className="border border-purple-700 text-purple-500 py-3 rounded-lg font-bold hover:bg-purple-700/10 transition-colors"
+            onClick={() => handleNavigation("/login")}
           >
-            Features
-          </Link>
-        </div>
-        <div
-          className=" hover:text-purple-700/90 text-purple-500 cursor-pointer font-semibold z-100 flex items-center gap-1 border-b-2 border-purple-500"
-          onClick={(e) =>
-            handleToggleDropDown(e, "jobs", [
-              "Free Trial",
-              "Usage-Based Pricing",
-              "Price Comparison",
-              "Billing FAQs",
-            ])
-          }
-        >
-          Pricing
-          <FaAngleDown className="text-purple-500 hover:text-purple-700" />
-        </div>
-        <div
-          className=" hover:text-purple-700/90 text-purple-500 cursor-pointer font-semibold flex items-center gap-1 border-b-2 border-purple-500"
-          onClick={(e) =>
-            handleToggleDropDown(e, "services", [
-              "Consulting Services",
-              "Support Services",
-              "Training and Development",
-            ])
-          }
-        >
-          Services
-          <FaAngleDown className="text-purple-500 hover:text-purple-700" />
+            Login
+          </button>
         </div>
       </div>
     </>
