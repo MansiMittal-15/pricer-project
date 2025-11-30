@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import white_bg from "../assets/white_bg2.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import {
   FaEye,
@@ -8,6 +7,7 @@ import {
   FaSpinner,
   FaUserPlus,
 } from "react-icons/fa";
+import { Helmet } from "react-helmet-async"; // 1. Import Helmet
 import Header from "../components/Header";
 import { register } from "../utils/api";
 import { toast } from "react-hot-toast";
@@ -25,16 +25,26 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  const handleSignup = async () => {
+  // 2. Modified to accept the event object for form submission
+  const handleSignup = async (e) => {
+    e.preventDefault(); // Prevent default form submission/page reload
+
+    // Basic client-side check
+    if (!user.fullname || !user.email || !user.password) {
+        toast.error("Please fill in all required fields.");
+        return;
+    }
+    
     try {
       setIsLoading(true);
       const response = await register(user);
+      
       if (response?.data?.success) {
-        toast.success(response?.data?.message);
+        toast.success(response?.data?.message || "Registration successful!");
       }
       navigate("/login");
     } catch (error) {
-      toast.error(error?.response?.data?.message ? error?.response?.data?.message : error?.message);
+      toast.error(error?.response?.data?.message || "Signup failed. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -44,8 +54,20 @@ const Signup = () => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
+  
   return (
     <>
+      {/* 👑 Helmet for Metadata (SEO) 👑 */}
+      <Helmet>
+        <title>Pricer | Create Your Account</title>
+        <meta
+          name="description"
+          content="Create your Pricer account to start using real-time pricing intelligence and analytics for your business."
+        />
+        <meta name="robots" content="noindex, nofollow" /> {/* Recommended for authentication pages */}
+        <link rel="canonical" href="https://www.yourdomain.com/signup" />
+      </Helmet>
+
       <Header />
       <div className="min-h-screen pt-8 pb-16">
         <div className="max-w-4xl mx-auto px-6">
@@ -61,11 +83,13 @@ const Signup = () => {
                 </p>
               </div>
 
-              <form className="space-y-6 max-w-2xl mx-auto">
+              {/* 3. UX/A11Y FIX: Attached handleSignup to form onSubmit */}
+              <form onSubmit={handleSignup} className="space-y-6 max-w-2xl mx-auto">
                 <div className="grid md:grid-cols-2 gap-6">
+                  {/* Full Name Input */}
                   <div className="space-y-2">
                     <label htmlFor="fullname" className="block text-sm font-medium text-gray-300">
-                      Full Name
+                      Full Name <span className="text-neon-pink">*</span>
                     </label>
                     <input
                       type="text"
@@ -75,28 +99,33 @@ const Signup = () => {
                       onChange={handleInputChange}
                       className="input-neon w-full"
                       placeholder="Enter your full name"
+                      autoComplete="name" // A11Y/UX: Helps browser autofill
+                      required
                     />
                   </div>
 
+                  {/* Phone Number Input */}
                   <div className="space-y-2">
                     <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-300">
                       Phone Number
                     </label>
                     <input
-                      type="text"
+                      type="tel" // UX/A11Y: Use type="tel" for mobile friendly input
                       id="phoneNumber"
                       name="phoneNumber"
                       value={user.phoneNumber}
                       onChange={handleInputChange}
                       className="input-neon w-full"
-                      placeholder="Enter your phone number"
+                      placeholder="Enter your phone number (optional)"
+                      autoComplete="tel"
                     />
                   </div>
                 </div>
 
+                {/* Email Input */}
                 <div className="space-y-2">
                   <label htmlFor="email" className="block text-sm font-medium text-gray-300">
-                    Email Address
+                    Email Address <span className="text-neon-pink">*</span>
                   </label>
                   <input
                     type="email"
@@ -106,12 +135,15 @@ const Signup = () => {
                     onChange={handleInputChange}
                     className="input-neon w-full"
                     placeholder="Enter your email address"
+                    autoComplete="email" // A11Y/UX: Helps browser autofill
+                    required
                   />
                 </div>
 
+                {/* Password Input */}
                 <div className="space-y-2">
                   <label htmlFor="password" className="block text-sm font-medium text-gray-300">
-                    Password
+                    Password <span className="text-neon-pink">*</span>
                   </label>
                   <div className="relative">
                     <input
@@ -121,10 +153,14 @@ const Signup = () => {
                       value={user.password}
                       onChange={handleInputChange}
                       className="input-neon w-full pr-12"
-                      placeholder="Create a strong password"
+                      placeholder="Create a strong password (min 8 characters)"
+                      autoComplete="new-password" // A11Y/UX: Indicates new password field
+                      required
+                      minLength="8" // UX improvement
                     />
                     <button
                       type="button"
+                      aria-label={showPassword ? "Hide password" : "Show password"} // A11Y improvement
                       className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-neon-blue transition-colors"
                       onClick={() => setShowPassword(!showPassword)}
                     >
@@ -133,16 +169,15 @@ const Signup = () => {
                   </div>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-4 pt-2">
                   <button
-                    type="button"
-                    onClick={handleSignup}
+                    type="submit" // 4. Changed type="button" to type="submit"
                     disabled={isLoading}
                     className="btn-neon w-full text-lg py-4"
                   >
                     {isLoading ? (
-                      <span className="flex items-center gap-2 justify-center">
-                        <div className="spinner"></div>
+                      <span className="flex items-center gap-2 justify-center" aria-live="assertive" aria-busy="true"> {/* A11Y: Added aria-live/busy */}
+                        <FaSpinner className="animate-spin" />
                         Creating Account...
                       </span>
                     ) : (
@@ -162,6 +197,7 @@ const Signup = () => {
                   <button
                     type="button"
                     className="btn-glass w-full text-lg py-4 flex items-center justify-center gap-3"
+                    aria-label="Sign up with Google"
                   >
                     <FaGoogle className="text-xl" />
                     <span>Google</span>
@@ -176,14 +212,14 @@ const Signup = () => {
                 </Link>
               </div>
 
-              {/* Terms and Privacy */}
+              {/* Terms and Privacy - Great UX addition */}
               <div className="text-center text-sm text-gray-500">
                 By creating an account, you agree to our{" "}
-                <Link to="#" className="text-neon-blue hover:text-neon-purple transition-colors">
+                <Link to="/terms" className="text-neon-blue hover:text-neon-purple transition-colors">
                   Terms of Service
                 </Link>{" "}
                 and{" "}
-                <Link to="#" className="text-neon-blue hover:text-neon-purple transition-colors">
+                <Link to="/privacy" className="text-neon-blue hover:text-neon-purple transition-colors">
                   Privacy Policy
                 </Link>
               </div>

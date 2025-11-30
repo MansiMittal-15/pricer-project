@@ -20,6 +20,7 @@ const Header = () => {
     name: "",
   });
 
+  // Desktop Dropdown Toggle Logic
   const handleToggleDropDown = (e, name, items) => {
     const isSameDropDown =
       dropDownConfig.isOpen && dropDownConfig.name === name;
@@ -31,6 +32,7 @@ const Header = () => {
     });
   };
 
+  // Click Outside Hook
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropDownRef.current && !dropDownRef.current.contains(event.target)) {
@@ -49,7 +51,11 @@ const Header = () => {
     };
   }, [dropDownConfig.isOpen]);
 
+  // Logout Handler
   const handleLogout = async () => {
+    // Note: The actual API call for `logout` is commented out in the original, 
+    // but the state clearing is essential for the UI.
+    // await logout(); 
     localStorage.removeItem("token");
     dispatch(setUser(null));
     toast.success("Logged out successfully");
@@ -66,42 +72,53 @@ const Header = () => {
         />
       )}
 
-      {/* Modern SaaS Header with neon effects */}
-      <div className="bg-dark-950/95 backdrop-blur-lg border-b border-neon-blue/20 py-4 px-5 sticky top-0 z-50 animate-fade-in">
+      {/* 1. Semantic Tag: Changed outer div to <header> */}
+      <header className="bg-dark-950/95 backdrop-blur-lg border-b border-neon-blue/20 py-4 px-5 sticky top-0 z-50 animate-fade-in">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-16 max-lg:gap-6">
             <div className="flex items-center gap-4">
+              {/* Mobile Navigation Toggle (Hamburger Icon) */}
               <FaBars 
                 onClick={() => navigate("/mobileNavigation")} 
-                className="text-neon-blue text-2xl cursor-pointer hidden max-md:block hover:text-neon-purple transition-colors duration-300" 
+                className="text-neon-blue text-2xl cursor-pointer hidden max-md:block hover:text-neon-purple transition-colors duration-300"
+                aria-label="Open mobile navigation menu" // A11Y improvement
               />
+              {/* Logo/Site Title */}
               <div className="text-3xl font-bold max-sm:text-xl max-md:text-2xl">
                 <Link to={"/"} className="gradient-text hover:animate-pulse-neon transition-all duration-300">
-                  Pricer
+                  Pricer {/* Primary keyword is visible here */}
                 </Link>
               </div>
             </div>
-            <nav className="flex gap-8 max-md:hidden">
+            
+            {/* 2. Semantic Tag: Changed navigation div to <nav> */}
+            <nav className="flex gap-8 max-md:hidden" aria-label="Main desktop navigation">
               <Link to={"/contact"} className="nav-link">
                 Contact
               </Link>
               <Link to="/features" className="nav-link">
                 Features
               </Link>
+              
+              {/* Pricing Dropdown */}
               <div
                 className="nav-link cursor-pointer flex items-center gap-1"
                 onClick={(e) =>
-                  handleToggleDropDown(e, "jobs", [
+                  handleToggleDropDown(e, "pricing", [ // 3. Renamed 'jobs' to 'pricing' for clarity
                     "Free Trial",
                     "Usage-Based Pricing", 
                     "Price Comparison",
                     "Billing FAQs",
                   ])
                 }
+                aria-haspopup="true" // A11Y for dropdown
+                aria-expanded={dropDownConfig.isOpen && dropDownConfig.name === "pricing"}
               >
                 Pricing
-                <FaAngleDown className="text-sm transition-transform duration-300 hover:rotate-180" />
+                <FaAngleDown className="text-sm transition-transform duration-300" />
               </div>
+              
+              {/* Services Dropdown */}
               <div
                 className="nav-link cursor-pointer flex items-center gap-1"
                 onClick={(e) =>
@@ -111,21 +128,24 @@ const Header = () => {
                     "Training and Development",
                   ])
                 }
+                aria-haspopup="true" // A11Y for dropdown
+                aria-expanded={dropDownConfig.isOpen && dropDownConfig.name === "services"}
               >
                 Services
-                <FaAngleDown className="text-sm transition-transform duration-300 hover:rotate-180" />
+                <FaAngleDown className="text-sm transition-transform duration-300" />
               </div>
             </nav>
           </div>
           
+          {/* User Authentication Section */}
           {user ? (
             <div className="flex gap-4 items-center">
               <p className="text-gray-300 hover:text-neon-blue transition-colors">
                 Welcome, {user?.fullname}
               </p>
-              <div className="relative">
+              <div className="relative" aria-label={`User profile for ${user?.fullname}`}> {/* A11Y label */}
                 <FaUserCircle className="text-neon-blue text-4xl hover:text-neon-purple transition-colors animate-bounce-soft" />
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-neon-green rounded-full animate-pulse"></div>
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-neon-green rounded-full animate-pulse" aria-hidden="true"></div> {/* Hide decorative status dot */}
               </div>
               <button
                 onClick={handleLogout}
@@ -149,7 +169,7 @@ const Header = () => {
             </div>
           )}
         </div>
-      </div>
+      </header>
     </>
   );
 };
